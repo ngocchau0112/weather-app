@@ -106,14 +106,46 @@ function getForecast(coordinates) {
 }
 
 //Get geolocation based on current position
-function showCurrentCity(response) {
+function currentLocation(position) {
+  let lat = position.coords.latitude.toFixed(4);
+  let lon = position.coords.longitude.toFixed(4);
+  let weatherAPIKey = "e39c2d2fa97742a130427a035ad0b7a5";
+  let weatherAPIUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${weatherAPIKey}`;
+  axios.get(weatherAPIUrl).then(showWeather);
+}
+showCurrentLocation();
+function showCurrentLocation() {
+  navigator.geolocation.getCurrentPosition(currentLocation);
+}
+let currentPositionButton = document.querySelector("#current-position-button");
+currentPositionButton.addEventListener("click", function () {
+  navigator.geolocation.getCurrentPosition(currentLocation);
+});
+//Input a City and Search
+function outputCity(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#city-input");
+  let city = `${searchInput.value}`;
+  city = city.trim().toLowerCase();
+  searchCity(city);
+}
+function searchCity(city) {
+  let weatherAPIKey = "e39c2d2fa97742a130427a035ad0b7a5";
+  let weatherAPIUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherAPIKey}`;
+  let searchingStatus = document.querySelector("#searching-status");
+  searchingStatus.innerHTML = `Searching for ${city}...`;
+  axios.get(weatherAPIUrl).then(showWeather);
+}
+function showWeather(response) {
+  let city = response.data.name;
+  let temp = response.data.main.temp;
   let currentCityName = document.querySelector("#city-name");
   let currentTemp = document.querySelector("#city-temperature");
   let currentWeather = document.querySelector("#current-weather");
   let currentHumidity = document.querySelector("#humidity");
   let currentWindSpeed = document.querySelector("#wind");
   let currentWeatherIcon = document.querySelector("#current-weather-icon");
-
+  let searchingStatus = document.querySelector("#searching-status");
   currentCityName.innerHTML = response.data.name;
   currentTemp.innerHTML = response.data.main.temp;
   currentWeather.innerHTML = response.data.weather[0].description;
@@ -124,371 +156,62 @@ function showCurrentCity(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   currentWeatherIcon.setAttribute("alt", response.data.weather[0].description);
+  searchingStatus.innerHTML = ``;
 
-  let tempCityC = Math.round(response.data.main.temp);
-  let tempCityF = Math.round((response.data.main.temp * 9) / 5 + 32);
-
-  function changeToF(event) {
-    event.preventDefault();
-    Cdegree.classList.remove("active");
-    Fdegree.classList.add("active");
-    currentTemp.innerHTML = `${tempCityF}`;
-  }
-
-  function changeToC(event) {
-    event.preventDefault();
-    Fdegree.classList.remove("active");
-    Cdegree.classList.add("active");
-    currentTemp.innerHTML = `${tempCityC}`;
-  }
-
-  let Fdegree = document.querySelector("#Fdegree");
-  Fdegree.addEventListener("click", changeToF);
-  let Cdegree = document.querySelector("#Cdegree");
-  Cdegree.addEventListener("click", changeToC);
-}
-
-function currentLocation(position) {
-  let lat = position.coords.latitude.toFixed(4);
-  let lon = position.coords.longitude.toFixed(4);
-  let weatherAPIKey = "e39c2d2fa97742a130427a035ad0b7a5";
-  let weatherAPIUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${weatherAPIKey}`;
-
-  axios.get(weatherAPIUrl).then(showCurrentCity);
-}
-
-showCurrentLocation();
-function showCurrentLocation() {
-  navigator.geolocation.getCurrentPosition(currentLocation);
-}
-
-let currentPositionButton = document.querySelector("#current-position-button");
-currentPositionButton.addEventListener("click", function () {
-  navigator.geolocation.getCurrentPosition(currentLocation);
-});
-
-//Input a City and Search
-function outputCity(event) {
-  event.preventDefault();
-
-  let searchInput = document.querySelector("#city-input");
-  let city = `${searchInput.value}`;
-  city = city.trim().toLowerCase();
-  let weatherAPIKey = "e39c2d2fa97742a130427a035ad0b7a5";
-  let weatherAPIUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherAPIKey}`;
-
-  let searchingStatus = document.querySelector("#searching-status");
-  searchingStatus.innerHTML = `Searching for ${city}...`;
-
-  axios.get(weatherAPIUrl).then(function (response) {
-    let city = response.data.name;
-    let temp = response.data.main.temp;
-
-    let currentCityName = document.querySelector("#city-name");
-    let currentTemp = document.querySelector("#city-temperature");
-    let currentWeather = document.querySelector("#current-weather");
-    let currentHumidity = document.querySelector("#humidity");
-    let currentWindSpeed = document.querySelector("#wind");
-    let currentWeatherIcon = document.querySelector("#current-weather-icon");
-    let searchingStatus = document.querySelector("#searching-status");
-
-    currentCityName.innerHTML = response.data.name;
-    currentTemp.innerHTML = response.data.main.temp;
-    currentWeather.innerHTML = response.data.weather[0].description;
-    currentHumidity.innerHTML = response.data.main.humidity;
-    currentWindSpeed.innerHTML = response.data.wind.speed;
-    currentWeatherIcon.setAttribute(
-      "src",
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-    );
-    currentWeatherIcon.setAttribute(
-      "alt",
-      response.data.weather[0].description
-    );
-    searchingStatus.innerHTML = ``;
-
-    getForecast(response.data.coord);
-
-    if (city !== undefined) {
-      let tempCityC = Math.round(response.data.main.temp);
-      let tempCityF = Math.round((response.data.main.temp * 9) / 5 + 32);
-
-      function changeToF(event) {
-        event.preventDefault();
-        Cdegree.classList.remove("active");
-        Fdegree.classList.add("active");
-        currentTemp.innerHTML = `${tempCityF}`;
-      }
-
-      function changeToC(event) {
-        event.preventDefault();
-        Fdegree.classList.remove("active");
-        Cdegree.classList.add("active");
-        currentTemp.innerHTML = `${tempCityC}`;
-      }
-
-      let Fdegree = document.querySelector("#Fdegree");
-      Fdegree.addEventListener("click", changeToF);
-      let Cdegree = document.querySelector("#Cdegree");
-      Cdegree.addEventListener("click", changeToC);
-    } else {
-      searchingStatus.innerHTML = `Sorry, we don't know the weather for ${city}, try going to https://www.google.com/search?q=weather+${city}`;
+  if (city !== undefined) {
+    let tempCityC = Math.round(response.data.main.temp);
+    let tempCityF = Math.round((response.data.main.temp * 9) / 5 + 32);
+    function changeToF(event) {
+      event.preventDefault();
+      Cdegree.classList.remove("active");
+      Fdegree.classList.add("active");
+      currentTemp.innerHTML = `${tempCityF}`;
     }
-  });
-}
-
-function enterCity(event) {
-  event.preventDefault();
-
-  if (event.keyCode === 13) {
-    outputCity(event);
+    function changeToC(event) {
+      event.preventDefault();
+      Fdegree.classList.remove("active");
+      Cdegree.classList.add("active");
+      currentTemp.innerHTML = `${tempCityC}`;
+    }
+    let Fdegree = document.querySelector("#Fdegree");
+    Fdegree.addEventListener("click", changeToF);
+    let Cdegree = document.querySelector("#Cdegree");
+    Cdegree.addEventListener("click", changeToC);
+  } else {
+    searchingStatus.innerHTML = `Sorry, we don't know the weather for ${city}, try going to https://www.google.com/search?q=weather+${city}`;
   }
 }
-
 let form = document.querySelector("#city-form");
 form.addEventListener("submit", outputCity);
-form.addEventListener("keyup", enterCity);
-
 //Show Lisbon Weather
 function showLisbonWeather(event) {
   event.preventDefault();
   let city = "lisbon";
-
-  let weatherAPIKey = "e39c2d2fa97742a130427a035ad0b7a5";
-  let weatherAPIUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherAPIKey}`;
-
-  axios.get(weatherAPIUrl).then(function (response) {
-    let temp = response.data.main.temp;
-
-    let currentCityName = document.querySelector("#city-name");
-    let currentTemp = document.querySelector("#city-temperature");
-    let currentWeather = document.querySelector("#current-weather");
-    let currentHumidity = document.querySelector("#humidity");
-    let currentWindSpeed = document.querySelector("#wind");
-    let currentWeatherIcon = document.querySelector("#current-weather-icon");
-    let searchingStatus = document.querySelector("#searching-status");
-
-    currentCityName.innerHTML = response.data.name;
-    currentTemp.innerHTML = Math.round(response.data.main.temp);
-    currentWeather.innerHTML = response.data.weather[0].description;
-    currentHumidity.innerHTML = response.data.main.humidity;
-    currentWindSpeed.innerHTML = response.data.wind.speed;
-    currentWeatherIcon.setAttribute(
-      "src",
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-    );
-    currentWeatherIcon.setAttribute(
-      "alt",
-      response.data.weather[0].description
-    );
-    searchingStatus.innerHTML = ``;
-
-    let tempCityC = Math.round(response.data.main.temp);
-    let tempCityF = Math.round((response.data.main.temp * 9) / 5 + 32);
-
-    function changeToF(event) {
-      event.preventDefault();
-      Cdegree.classList.remove("active");
-      Fdegree.classList.add("active");
-      currentTemp.innerHTML = `${tempCityF}`;
-    }
-
-    function changeToC(event) {
-      event.preventDefault();
-      Fdegree.classList.remove("active");
-      Cdegree.classList.add("active");
-      currentTemp.innerHTML = `${tempCityC}`;
-    }
-
-    let Fdegree = document.querySelector("#Fdegree");
-    Fdegree.addEventListener("click", changeToF);
-    let Cdegree = document.querySelector("#Cdegree");
-    Cdegree.addEventListener("click", changeToC);
-  });
+  searchCity(city);
 }
-
 let showLisbon = document.querySelector("#lisbon");
 showLisbon.addEventListener("click", showLisbonWeather);
-
 //Show Paris Weather
 function showParisWeather(event) {
   event.preventDefault();
   let city = "paris";
-
-  let weatherAPIKey = "e39c2d2fa97742a130427a035ad0b7a5";
-  let weatherAPIUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherAPIKey}`;
-
-  axios.get(weatherAPIUrl).then(function (response) {
-    let temp = response.data.main.temp;
-
-    let currentCityName = document.querySelector("#city-name");
-    let currentTemp = document.querySelector("#city-temperature");
-    let currentWeather = document.querySelector("#current-weather");
-    let currentHumidity = document.querySelector("#humidity");
-    let currentWindSpeed = document.querySelector("#wind");
-    let currentWeatherIcon = document.querySelector("#current-weather-icon");
-    let searchingStatus = document.querySelector("#searching-status");
-
-    currentCityName.innerHTML = response.data.name;
-    currentTemp.innerHTML = Math.round(response.data.main.temp);
-    currentWeather.innerHTML = response.data.weather[0].description;
-    currentHumidity.innerHTML = response.data.main.humidity;
-    currentWindSpeed.innerHTML = response.data.wind.speed;
-    currentWeatherIcon.setAttribute(
-      "src",
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-    );
-    currentWeatherIcon.setAttribute(
-      "alt",
-      response.data.weather[0].description
-    );
-    searchingStatus.innerHTML = ``;
-
-    let tempCityC = Math.round(response.data.main.temp);
-    let tempCityF = Math.round((response.data.main.temp * 9) / 5 + 32);
-
-    function changeToF(event) {
-      event.preventDefault();
-      Cdegree.classList.remove("active");
-      Fdegree.classList.add("active");
-      currentTemp.innerHTML = `${tempCityF}`;
-    }
-
-    function changeToC(event) {
-      event.preventDefault();
-      Fdegree.classList.remove("active");
-      Cdegree.classList.add("active");
-      currentTemp.innerHTML = `${tempCityC}`;
-    }
-
-    let Fdegree = document.querySelector("#Fdegree");
-    Fdegree.addEventListener("click", changeToF);
-    let Cdegree = document.querySelector("#Cdegree");
-    Cdegree.addEventListener("click", changeToC);
-  });
+  searchCity(city);
 }
-
 let showParis = document.querySelector("#paris");
 showParis.addEventListener("click", showParisWeather);
-
 //Show Sydney Weather
 function showSydneyWeather(event) {
   event.preventDefault();
   let city = "sydney";
-
-  let weatherAPIKey = "e39c2d2fa97742a130427a035ad0b7a5";
-  let weatherAPIUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherAPIKey}`;
-
-  axios.get(weatherAPIUrl).then(function (response) {
-    let temp = response.data.main.temp;
-
-    let currentCityName = document.querySelector("#city-name");
-    let currentTemp = document.querySelector("#city-temperature");
-    let currentWeather = document.querySelector("#current-weather");
-    let currentHumidity = document.querySelector("#humidity");
-    let currentWindSpeed = document.querySelector("#wind");
-    let currentWeatherIcon = document.querySelector("#current-weather-icon");
-    let searchingStatus = document.querySelector("#searching-status");
-
-    currentCityName.innerHTML = response.data.name;
-    currentTemp.innerHTML = Math.round(response.data.main.temp);
-    currentWeather.innerHTML = response.data.weather[0].description;
-    currentHumidity.innerHTML = response.data.main.humidity;
-    currentWindSpeed.innerHTML = response.data.wind.speed;
-    currentWeatherIcon.setAttribute(
-      "src",
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-    );
-    currentWeatherIcon.setAttribute(
-      "alt",
-      response.data.weather[0].description
-    );
-    searchingStatus.innerHTML = ``;
-
-    let tempCityC = Math.round(response.data.main.temp);
-    let tempCityF = Math.round((response.data.main.temp * 9) / 5 + 32);
-
-    function changeToF(event) {
-      event.preventDefault();
-      Cdegree.classList.remove("active");
-      Fdegree.classList.add("active");
-      currentTemp.innerHTML = `${tempCityF}`;
-    }
-
-    function changeToC(event) {
-      event.preventDefault();
-      Fdegree.classList.remove("active");
-      Cdegree.classList.add("active");
-      currentTemp.innerHTML = `${tempCityC}`;
-    }
-
-    let Fdegree = document.querySelector("#Fdegree");
-    Fdegree.addEventListener("click", changeToF);
-    let Cdegree = document.querySelector("#Cdegree");
-    Cdegree.addEventListener("click", changeToC);
-  });
+  searchCity(city);
 }
-
 let showSydney = document.querySelector("#sydney");
 showSydney.addEventListener("click", showSydneyWeather);
-
 //Show San Francisco Weather
 function showSanFWeather(event) {
   event.preventDefault();
   let city = "san francisco";
-
-  let weatherAPIKey = "e39c2d2fa97742a130427a035ad0b7a5";
-  let weatherAPIUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherAPIKey}`;
-
-  axios.get(weatherAPIUrl).then(function (response) {
-    let temp = response.data.main.temp;
-
-    let currentCityName = document.querySelector("#city-name");
-    let currentTemp = document.querySelector("#city-temperature");
-    let currentWeather = document.querySelector("#current-weather");
-    let currentHumidity = document.querySelector("#humidity");
-    let currentWindSpeed = document.querySelector("#wind");
-    let currentWeatherIcon = document.querySelector("#current-weather-icon");
-    let searchingStatus = document.querySelector("#searching-status");
-
-    currentCityName.innerHTML = response.data.name;
-    currentTemp.innerHTML = Math.round(response.data.main.temp);
-    currentWeather.innerHTML = response.data.weather[0].description;
-    currentHumidity.innerHTML = response.data.main.humidity;
-    currentWindSpeed.innerHTML = response.data.wind.speed;
-    currentWeatherIcon.setAttribute(
-      "src",
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-    );
-    currentWeatherIcon.setAttribute(
-      "alt",
-      response.data.weather[0].description
-    );
-    searchingStatus.innerHTML = ``;
-
-    let tempCityC = Math.round(response.data.main.temp);
-    let tempCityF = Math.round((response.data.main.temp * 9) / 5 + 32);
-
-    function changeToF(event) {
-      event.preventDefault();
-      Cdegree.classList.remove("active");
-      Fdegree.classList.add("active");
-      currentTemp.innerHTML = `${tempCityF}`;
-    }
-
-    function changeToC(event) {
-      event.preventDefault();
-      Fdegree.classList.remove("active");
-      Cdegree.classList.add("active");
-      currentTemp.innerHTML = `${tempCityC}`;
-    }
-
-    let Fdegree = document.querySelector("#Fdegree");
-    Fdegree.addEventListener("click", changeToF);
-    let Cdegree = document.querySelector("#Cdegree");
-    Cdegree.addEventListener("click", changeToC);
-  });
+  searchCity(city);
 }
-
 let showSanF = document.querySelector("#sanfrancisco");
 showSanF.addEventListener("click", showSanFWeather);
