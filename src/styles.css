@@ -26,6 +26,7 @@ a:hover {
 .city {
   padding: 60px;
 }
+
 .cityName {
   color: white;
   font-family: "Josefin Sans", sans-serif;
@@ -37,12 +38,12 @@ a:hover {
   color: #09203f;
 }
 
-.currentCityName {
+#city-name {
   font-size: 80px;
   font-family: "Lobster", cursive;
 }
 
-.todayWeather {
+#city-temperature {
   font-size: 60px;
   font-family: "Lobster", cursive;
 }

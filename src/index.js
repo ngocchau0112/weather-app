@@ -44,7 +44,7 @@ function currentDate() {
   ];
   let month = months[now.getMonth()];
 
-  let current = document.querySelector("#currentDate");
+  let current = document.querySelector("#current-date");
   current.innerHTML = `${day} (${date} ${month} ${year})<br>${hours}:${minutes}:${seconds}`;
 }
 
