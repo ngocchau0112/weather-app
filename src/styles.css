@@ -17,6 +17,7 @@ a {
 a:hover {
   color: #537895;
 }
+
 .day {
   color: #09203f;
   font-size: 18px;
@@ -101,11 +102,15 @@ input[type="text"] {
 .cityName {
   position: relative;
   left: -35px;
-  color: beige;
+  color: #c6c6c6;
 }
 
 .cityName:hover {
   color: white;
+}
+
+.cityName .active {
+  color: #fff;
 }
 
 #current-weather {
@@ -127,4 +132,13 @@ input[type="text"] {
 
 #current-weather-icon {
   width: 100px;
+}
+
+.temp-types .active {
+  color: #09203f;
+  cursor: default;
+}
+
+.temp-types .active:hover {
+  text-decoration: none;
 }

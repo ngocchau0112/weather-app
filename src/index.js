@@ -75,16 +75,22 @@ function showCurrentCity(response) {
 
   function changeToF(event) {
     event.preventDefault();
+    Cdegree.classList.remove("active");
+    Fdegree.classList.add("active");
     currentTemp.innerHTML = `${tempCityF}`;
   }
 
   function changeToC(event) {
     event.preventDefault();
+    Fdegree.classList.remove("active");
+    Cdegree.classList.add("active");
     currentTemp.innerHTML = `${tempCityC}`;
   }
 
-  document.querySelector("#Fdegree").addEventListener("click", changeToF);
-  document.querySelector("#Cdegree").addEventListener("click", changeToC);
+  let Fdegree = document.querySelector("#Fdegree");
+  Fdegree.addEventListener("click", changeToF);
+  let Cdegree = document.querySelector("#Cdegree");
+  Cdegree.addEventListener("click", changeToC);
 }
 
 function currentLocation(position) {
@@ -147,22 +153,27 @@ function outputCity(event) {
     searchingStatus.innerHTML = ``;
 
     if (city !== undefined) {
-      let tempC = Math.round(temp);
-      let tempF = Math.round((temp * 9) / 5 + 32);
-      currentTemp.innerHTML = `${tempC}`;
+      let tempCityC = Math.round(response.data.main.temp);
+      let tempCityF = Math.round((response.data.main.temp * 9) / 5 + 32);
 
       function changeToF(event) {
         event.preventDefault();
-        currentTemp.innerHTML = `${tempF}`;
+        Cdegree.classList.remove("active");
+        Fdegree.classList.add("active");
+        currentTemp.innerHTML = `${tempCityF}`;
       }
 
       function changeToC(event) {
         event.preventDefault();
-        currentTemp.innerHTML = `${tempC}`;
+        Fdegree.classList.remove("active");
+        Cdegree.classList.add("active");
+        currentTemp.innerHTML = `${tempCityC}`;
       }
 
-      document.querySelector("#Fdegree").addEventListener("click", changeToF);
-      document.querySelector("#Cdegree").addEventListener("click", changeToC);
+      let Fdegree = document.querySelector("#Fdegree");
+      Fdegree.addEventListener("click", changeToF);
+      let Cdegree = document.querySelector("#Cdegree");
+      Cdegree.addEventListener("click", changeToC);
     } else {
       searchingStatus.innerHTML = `Sorry, we don't know the weather for ${city}, try going to https://www.google.com/search?q=weather+${city}`;
     }
@@ -201,7 +212,7 @@ function showLisbonWeather(event) {
     let searchingStatus = document.querySelector("#searching-status");
 
     currentCityName.innerHTML = response.data.name;
-    currentTemp.innerHTML = response.data.main.temp;
+    currentTemp.innerHTML = Math.round(response.data.main.temp);
     currentWeather.innerHTML = response.data.weather[0].description;
     currentHumidity.innerHTML = response.data.main.humidity;
     currentWindSpeed.innerHTML = response.data.wind.speed;
@@ -215,22 +226,27 @@ function showLisbonWeather(event) {
     );
     searchingStatus.innerHTML = ``;
 
-    let tempC = Math.round(temp);
-    let tempF = Math.round((temp * 9) / 5 + 32);
-    currentTemp.innerHTML = `${tempC}`;
+    let tempCityC = Math.round(response.data.main.temp);
+    let tempCityF = Math.round((response.data.main.temp * 9) / 5 + 32);
 
     function changeToF(event) {
       event.preventDefault();
-      currentTemp.innerHTML = `${tempF}`;
+      Cdegree.classList.remove("active");
+      Fdegree.classList.add("active");
+      currentTemp.innerHTML = `${tempCityF}`;
     }
 
     function changeToC(event) {
       event.preventDefault();
-      currentTemp.innerHTML = `${tempC}`;
+      Fdegree.classList.remove("active");
+      Cdegree.classList.add("active");
+      currentTemp.innerHTML = `${tempCityC}`;
     }
 
-    document.querySelector("#Fdegree").addEventListener("click", changeToF);
-    document.querySelector("#Cdegree").addEventListener("click", changeToC);
+    let Fdegree = document.querySelector("#Fdegree");
+    Fdegree.addEventListener("click", changeToF);
+    let Cdegree = document.querySelector("#Cdegree");
+    Cdegree.addEventListener("click", changeToC);
   });
 }
 
@@ -257,7 +273,7 @@ function showParisWeather(event) {
     let searchingStatus = document.querySelector("#searching-status");
 
     currentCityName.innerHTML = response.data.name;
-    currentTemp.innerHTML = response.data.main.temp;
+    currentTemp.innerHTML = Math.round(response.data.main.temp);
     currentWeather.innerHTML = response.data.weather[0].description;
     currentHumidity.innerHTML = response.data.main.humidity;
     currentWindSpeed.innerHTML = response.data.wind.speed;
@@ -271,22 +287,27 @@ function showParisWeather(event) {
     );
     searchingStatus.innerHTML = ``;
 
-    let tempC = Math.round(temp);
-    let tempF = Math.round((temp * 9) / 5 + 32);
-    currentTemp.innerHTML = `${tempC}`;
+    let tempCityC = Math.round(response.data.main.temp);
+    let tempCityF = Math.round((response.data.main.temp * 9) / 5 + 32);
 
     function changeToF(event) {
       event.preventDefault();
-      currentTemp.innerHTML = `${tempF}`;
+      Cdegree.classList.remove("active");
+      Fdegree.classList.add("active");
+      currentTemp.innerHTML = `${tempCityF}`;
     }
 
     function changeToC(event) {
       event.preventDefault();
-      currentTemp.innerHTML = `${tempC}`;
+      Fdegree.classList.remove("active");
+      Cdegree.classList.add("active");
+      currentTemp.innerHTML = `${tempCityC}`;
     }
 
-    document.querySelector("#Fdegree").addEventListener("click", changeToF);
-    document.querySelector("#Cdegree").addEventListener("click", changeToC);
+    let Fdegree = document.querySelector("#Fdegree");
+    Fdegree.addEventListener("click", changeToF);
+    let Cdegree = document.querySelector("#Cdegree");
+    Cdegree.addEventListener("click", changeToC);
   });
 }
 
@@ -313,7 +334,7 @@ function showSydneyWeather(event) {
     let searchingStatus = document.querySelector("#searching-status");
 
     currentCityName.innerHTML = response.data.name;
-    currentTemp.innerHTML = response.data.main.temp;
+    currentTemp.innerHTML = Math.round(response.data.main.temp);
     currentWeather.innerHTML = response.data.weather[0].description;
     currentHumidity.innerHTML = response.data.main.humidity;
     currentWindSpeed.innerHTML = response.data.wind.speed;
@@ -327,22 +348,27 @@ function showSydneyWeather(event) {
     );
     searchingStatus.innerHTML = ``;
 
-    let tempC = Math.round(temp);
-    let tempF = Math.round((temp * 9) / 5 + 32);
-    currentTemp.innerHTML = `${tempC}`;
+    let tempCityC = Math.round(response.data.main.temp);
+    let tempCityF = Math.round((response.data.main.temp * 9) / 5 + 32);
 
     function changeToF(event) {
       event.preventDefault();
-      currentTemp.innerHTML = `${tempF}`;
+      Cdegree.classList.remove("active");
+      Fdegree.classList.add("active");
+      currentTemp.innerHTML = `${tempCityF}`;
     }
 
     function changeToC(event) {
       event.preventDefault();
-      currentTemp.innerHTML = `${tempC}`;
+      Fdegree.classList.remove("active");
+      Cdegree.classList.add("active");
+      currentTemp.innerHTML = `${tempCityC}`;
     }
 
-    document.querySelector("#Fdegree").addEventListener("click", changeToF);
-    document.querySelector("#Cdegree").addEventListener("click", changeToC);
+    let Fdegree = document.querySelector("#Fdegree");
+    Fdegree.addEventListener("click", changeToF);
+    let Cdegree = document.querySelector("#Cdegree");
+    Cdegree.addEventListener("click", changeToC);
   });
 }
 
@@ -369,7 +395,7 @@ function showSanFWeather(event) {
     let searchingStatus = document.querySelector("#searching-status");
 
     currentCityName.innerHTML = response.data.name;
-    currentTemp.innerHTML = response.data.main.temp;
+    currentTemp.innerHTML = Math.round(response.data.main.temp);
     currentWeather.innerHTML = response.data.weather[0].description;
     currentHumidity.innerHTML = response.data.main.humidity;
     currentWindSpeed.innerHTML = response.data.wind.speed;
@@ -383,22 +409,27 @@ function showSanFWeather(event) {
     );
     searchingStatus.innerHTML = ``;
 
-    let tempC = Math.round(temp);
-    let tempF = Math.round((temp * 9) / 5 + 32);
-    currentTemp.innerHTML = `${tempC}`;
+    let tempCityC = Math.round(response.data.main.temp);
+    let tempCityF = Math.round((response.data.main.temp * 9) / 5 + 32);
 
     function changeToF(event) {
       event.preventDefault();
-      currentTemp.innerHTML = `${tempF}`;
+      Cdegree.classList.remove("active");
+      Fdegree.classList.add("active");
+      currentTemp.innerHTML = `${tempCityF}`;
     }
 
     function changeToC(event) {
       event.preventDefault();
-      currentTemp.innerHTML = `${tempC}`;
+      Fdegree.classList.remove("active");
+      Cdegree.classList.add("active");
+      currentTemp.innerHTML = `${tempCityC}`;
     }
 
-    document.querySelector("#Fdegree").addEventListener("click", changeToF);
-    document.querySelector("#Cdegree").addEventListener("click", changeToC);
+    let Fdegree = document.querySelector("#Fdegree");
+    Fdegree.addEventListener("click", changeToF);
+    let Cdegree = document.querySelector("#Cdegree");
+    Cdegree.addEventListener("click", changeToC);
   });
 }
 
