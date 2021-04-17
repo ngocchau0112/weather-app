@@ -57,24 +57,30 @@ function showCurrentCity(response) {
   let currentWeather = document.querySelector("#current-weather");
   let currentHumidity = document.querySelector("#humidity");
   let currentWindSpeed = document.querySelector("#wind");
+  let currentWeatherIcon = document.querySelector("#current-weather-icon");
 
   currentCityName.innerHTML = response.data.name;
   currentTemp.innerHTML = response.data.main.temp;
   currentWeather.innerHTML = response.data.weather[0].description;
   currentHumidity.innerHTML = response.data.main.humidity;
   currentWindSpeed.innerHTML = response.data.wind.speed;
+  currentWeatherIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  currentWeatherIcon.setAttribute("alt", response.data.weather[0].description);
 
   let tempCityC = Math.round(response.data.main.temp);
   let tempCityF = Math.round((response.data.main.temp * 9) / 5 + 32);
 
   function changeToF(event) {
     event.preventDefault();
-    currentCityTemp.innerHTML = `${tempCityF}`;
+    currentTemp.innerHTML = `${tempCityF}`;
   }
 
   function changeToC(event) {
     event.preventDefault();
-    currentCityTemp.innerHTML = `${tempCityC}`;
+    currentTemp.innerHTML = `${tempCityC}`;
   }
 
   document.querySelector("#Fdegree").addEventListener("click", changeToF);
@@ -122,12 +128,22 @@ function outputCity(event) {
     let currentWeather = document.querySelector("#current-weather");
     let currentHumidity = document.querySelector("#humidity");
     let currentWindSpeed = document.querySelector("#wind");
+    let currentWeatherIcon = document.querySelector("#current-weather-icon");
+    let searchingStatus = document.querySelector("#searching-status");
 
     currentCityName.innerHTML = response.data.name;
     currentTemp.innerHTML = response.data.main.temp;
     currentWeather.innerHTML = response.data.weather[0].description;
     currentHumidity.innerHTML = response.data.main.humidity;
     currentWindSpeed.innerHTML = response.data.wind.speed;
+    currentWeatherIcon.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+    currentWeatherIcon.setAttribute(
+      "alt",
+      response.data.weather[0].description
+    );
     searchingStatus.innerHTML = ``;
 
     if (city !== undefined) {
@@ -181,12 +197,22 @@ function showLisbonWeather(event) {
     let currentWeather = document.querySelector("#current-weather");
     let currentHumidity = document.querySelector("#humidity");
     let currentWindSpeed = document.querySelector("#wind");
+    let currentWeatherIcon = document.querySelector("#current-weather-icon");
+    let searchingStatus = document.querySelector("#searching-status");
 
     currentCityName.innerHTML = response.data.name;
     currentTemp.innerHTML = response.data.main.temp;
     currentWeather.innerHTML = response.data.weather[0].description;
     currentHumidity.innerHTML = response.data.main.humidity;
     currentWindSpeed.innerHTML = response.data.wind.speed;
+    currentWeatherIcon.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+    currentWeatherIcon.setAttribute(
+      "alt",
+      response.data.weather[0].description
+    );
     searchingStatus.innerHTML = ``;
 
     let tempC = Math.round(temp);
@@ -227,12 +253,22 @@ function showParisWeather(event) {
     let currentWeather = document.querySelector("#current-weather");
     let currentHumidity = document.querySelector("#humidity");
     let currentWindSpeed = document.querySelector("#wind");
+    let currentWeatherIcon = document.querySelector("#current-weather-icon");
+    let searchingStatus = document.querySelector("#searching-status");
 
     currentCityName.innerHTML = response.data.name;
     currentTemp.innerHTML = response.data.main.temp;
     currentWeather.innerHTML = response.data.weather[0].description;
     currentHumidity.innerHTML = response.data.main.humidity;
     currentWindSpeed.innerHTML = response.data.wind.speed;
+    currentWeatherIcon.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+    currentWeatherIcon.setAttribute(
+      "alt",
+      response.data.weather[0].description
+    );
     searchingStatus.innerHTML = ``;
 
     let tempC = Math.round(temp);
@@ -273,12 +309,22 @@ function showSydneyWeather(event) {
     let currentWeather = document.querySelector("#current-weather");
     let currentHumidity = document.querySelector("#humidity");
     let currentWindSpeed = document.querySelector("#wind");
+    let currentWeatherIcon = document.querySelector("#current-weather-icon");
+    let searchingStatus = document.querySelector("#searching-status");
 
     currentCityName.innerHTML = response.data.name;
     currentTemp.innerHTML = response.data.main.temp;
     currentWeather.innerHTML = response.data.weather[0].description;
     currentHumidity.innerHTML = response.data.main.humidity;
     currentWindSpeed.innerHTML = response.data.wind.speed;
+    currentWeatherIcon.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+    currentWeatherIcon.setAttribute(
+      "alt",
+      response.data.weather[0].description
+    );
     searchingStatus.innerHTML = ``;
 
     let tempC = Math.round(temp);
@@ -319,12 +365,22 @@ function showSanFWeather(event) {
     let currentWeather = document.querySelector("#current-weather");
     let currentHumidity = document.querySelector("#humidity");
     let currentWindSpeed = document.querySelector("#wind");
+    let currentWeatherIcon = document.querySelector("#current-weather-icon");
+    let searchingStatus = document.querySelector("#searching-status");
 
     currentCityName.innerHTML = response.data.name;
     currentTemp.innerHTML = response.data.main.temp;
     currentWeather.innerHTML = response.data.weather[0].description;
     currentHumidity.innerHTML = response.data.main.humidity;
     currentWindSpeed.innerHTML = response.data.wind.speed;
+    currentWeatherIcon.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+    currentWeatherIcon.setAttribute(
+      "alt",
+      response.data.weather[0].description
+    );
     searchingStatus.innerHTML = ``;
 
     let tempC = Math.round(temp);
