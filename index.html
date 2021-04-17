@@ -1,69 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lobster&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
-            crossorigin="anonymous"
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lobster&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Source+Code+Pro&display=swap"
+      rel="stylesheet"
     />
-    <link rel="stylesheet" href="src/styles.css"/>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="src/styles.css" />
     <script
-            src="https://kit.fontawesome.com/87c5373029.js"
-            crossorigin="anonymous"
+      src="https://kit.fontawesome.com/87c5373029.js"
+      crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-<div class="container mt-4 p-3">
-    <div class="row justify-content-center p-1 align-items-center">
-        <div id = "lisbon" class="col"><figure class="text-center m-0"><a class="cityName" href ="">Lisbon</a></figure></div>
-        <div id = "paris" class="col"><figure class="text-center m-0"><a class="cityName" href ="">Paris</a></figure></div>
-        <div id = "sydney" class="col"><figure class="text-center m-0"><a class="cityName" href ="">Sydney</a></figure></div>
-        <div id = "sanfrancisco" class="col">
-            <figure class="text-center m-0"><a class="cityName" href ="">San Francisco</a></figure></div>
-        <div class="col-5">
-            <div class="input-group d-flex justify-content-end">
-                <form id = "city-form">
-                    <input
-                        type="text"
-                        class="cityInput form-control-lg "
-                        placeholder="Enter a Location"
-                        aria-label="Search"
-                        autocomplete="off"
-                        autofocus="on"
-                        id="city-input" />
-                    <input id = "searching-button" class="btn btn-info" type="submit" value="Search">
-                    <button id = "current-position-button" class="btn btn-primary" type="button">
-                        Current
-                    </button></form>
-            </div>
+  </head>
+  <body>
+    <div class="container mt-4 p-4 pt-1">
+      <div class="row justify-content-center p-3 align-items-center">
+        <div id="menu-cities" class="col-12"></div>
+      </div>
+      <div class="container p-3 w-auto mx-auto weather">
+        <div class="col-12 form-group d-flex p-4 justify-content-center">
+          <form id="city-form">
+            <input
+              type="text"
+              class="cityInput form-control-lg"
+              placeholder="Enter a Location"
+              aria-label="Search"
+              autocomplete="off"
+              autofocus="on"
+              id="city-input"
+            />
+            <input
+              id="searching-button"
+              class="btn btn-info"
+              type="submit"
+              value="Search"
+            />
+            <button
+              id="current-position-button"
+              class="btn btn-primary"
+              type="button"
+            >
+              Current
+            </button>
+          </form>
         </div>
-    </div>
-    <p>
-    <div class="container p-4 pb-2 currentDay">
         <figure class="text-center">
-            <div id = "searching-status" class="p today"></div>
-            <div id = "city-name" class="h1 today pb-3">Ho Chi Minh City</div>
-            <div id = "current-date" class="h6 today">Saturday (17 April 2021)<br>14:32:03</div>
-            <div id = "current-weather" class="h4 today">Scattered Clouds</div></figure>
+          <div id="searching-status" class="today"></div>
+          <div id="city-name" class="h1 today pb-3">Ho Chi Minh City</div>
+          <div id="current-date" class="h6 today">
+            Saturday (17 April 2021)<br />14:32:03
+          </div>
+          <div id="current-weather" class="h4 today">Scattered Clouds</div>
+        </figure>
         <div class="row align-items-center">
-            <div class="col"></div>
-            <div class="col-2 col-md today"><figure class="text-end"><img src="" alt="" id="current-weather-icon"></figure></div>
-            <div class="col-4 col-md today"><figure class="text-start"><span id = "city-temperature">16</span>
-                <span class="temp-types" id="temp-types"><a id="Cdegree" class="active" href="">°C</a>|<a id="Fdegree" class="" href="">°F</a></span></figure></div>
-            <div class="col-4 col-md col today">Humidity: <span id="humidity">88</span>%<br />Wind: <span id="wind">3</span>km/h</div>
+          <div class="col"></div>
+          <div class="col-2 col-md today">
+            <figure class="text-end">
+              <img src="" alt="" id="current-weather-icon" />
+            </figure>
+          </div>
+          <div class="col-4 col-md today">
+            <figure class="text-start">
+              <span id="city-temperature">16</span>
+              <span class="temp-types" id="temp-types"
+                ><a id="Cdegree" class="active" href="">°C</a> |
+                <a id="Fdegree" class="" href="">°F</a></span
+              >
+            </figure>
+          </div>
+          <div class="col-4 col-md col today">
+            Humidity: <span id="humidity">88</span>%<br />Wind:
+            <span id="wind">3</span>km/h
+          </div>
         </div>
-    </div>
-    </p>
-    <div class="container p-3 pb-1 weekdays">
+      <div class="row p-3 pb-1 weekdays">
         <figure class="text-center">
             <div class="row">
                 <div class="col day">Friday<br><i class="fas fa-sun fs-1"></i><br>16°</div>
@@ -72,10 +94,16 @@
                 <div class="col day">Monday<br><i class="fas fa-sun fs-1"></i><br>16°</div>
                 <div class="col day">Tuesday<br><i class="fas fa-sun fs-1"></i><br>16°</div>
             </div>
-        </figure>
     </div>
-</div>
-<a id = "github-link" class="h6" href="https://github.com/ngocchau0112/weather-app.git" target="_blank">Github Repository</a>
-<script src="src/index.js"></script>
-</body>
+    </div>
+    </div></div>
+    <a
+      id="github-link"
+      class="h6"
+      href="https://github.com/ngocchau0112/weather-app.git"
+      target="_blank"
+      >Github Repository</a
+    >
+    <script src="src/index.js"></script>
+  </body>
 </html>
