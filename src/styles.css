@@ -1,0 +1,111 @@
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  color: #09203f;
+}
+
+a {
+  text-decoration: none;
+  color: #09203f;
+  font-size: 60px;
+  font-family: "Lobster", cursive;
+}
+
+a:hover {
+  color: #537895;
+}
+.day {
+  color: #09203f;
+  font-size: 18px;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.city {
+  padding: 60px;
+}
+.cityName {
+  color: white;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 18px;
+}
+
+.today {
+  font-family: "Josefin Sans", sans-serif;
+  color: #09203f;
+}
+
+.currentCityName {
+  font-size: 80px;
+  font-family: "Lobster", cursive;
+}
+
+.todayWeather {
+  font-size: 60px;
+  font-family: "Lobster", cursive;
+}
+
+.container {
+  background: linear-gradient(to top, #09203f 0%, #537895 100%);
+  border-radius: 20px;
+}
+
+.container .weekdays {
+  background: radial-gradient(
+    circle at 0% 0.5%,
+    rgb(241, 241, 242) 0.1%,
+    rgb(224, 226, 228) 100.2%
+  );
+}
+
+.container .currentDay {
+  background: radial-gradient(
+    circle at 0% 0.5%,
+    rgb(241, 241, 242) 0.1%,
+    rgb(224, 226, 228) 100.2%
+  );
+}
+
+.btn {
+  display: inline;
+  height: 50px;
+}
+.btn-info {
+  background: white;
+}
+.btn-info:hover {
+  color: white;
+}
+
+input[type="text"] {
+  position: relative;
+  top: 2px;
+  font-size: 15px;
+  height: 50px;
+  width: 250px;
+}
+
+#temp-types {
+  font-size: 20px;
+  position: relative;
+  top: -28px;
+}
+
+#temp-types a {
+  font-size: 20px;
+}
+
+.cityName {
+  position: relative;
+  left: -35px;
+}
+
+#current-weather {
+  text-transform: capitalize;
+}
+
+#city-name {
+  text-transform: capitalize;
+}
