@@ -100,6 +100,11 @@ input[type="text"] {
 .cityName {
   position: relative;
   left: -35px;
+  color: beige;
+}
+
+.cityName:hover {
+  color: white;
 }
 
 #current-weather {

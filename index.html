@@ -24,11 +24,11 @@
 <body>
 <div class="container mt-4 p-3">
     <div class="row justify-content-center p-1 align-items-center">
-        <div id = "first-city" class="col cityName"><figure class="text-center m-0">Lisbon</figure></div>
-        <div class="col cityName"><figure class="text-center m-0">Paris</figure></div>
-        <div class="col cityName"><figure class="text-center m-0">Sydney</figure></div>
-        <div class="col cityName">
-            <figure class="text-center m-0">San Francisco</figure></div>
+        <div id = "lisbon" class="col"><figure class="text-center m-0"><a class="cityName" href ="#">Lisbon</a></figure></div>
+        <div id = "paris" class="col"><figure class="text-center m-0"><a class="cityName" href ="#">Paris</a></figure></div>
+        <div id = "sydney" class="col"><figure class="text-center m-0"><a class="cityName" href ="#">Sydney</a></figure></div>
+        <div id = "sanfrancisco" class="col">
+            <figure class="text-center m-0"><a class="cityName" href ="#">San Francisco</a></figure></div>
         <div class="col-5">
             <div class="input-group d-flex justify-content-end">
                 <form id = "city-form">
@@ -59,7 +59,7 @@
             <div class="col-2 col-md todayWeather today"><figure class="text-end"><i class="fas fa-sun"></i></figure></div>
             <div class="col-4 col-md todayWeather today"><figure class="text-start"><span id = "city-temperature">16</span>
                 <span id="temp-types"><a id ="Cdegree" href="#">°C</a>|<a id = "Fdegree" href="#">°F</a></span></figure></div>
-            <div class="col-4 col-md col extras today">Precipitation: 88%<br />Wind: 3km/h</div>
+            <div class="col-4 col-md col extras today">Humidity: <span id="humidity">88</span>%<br />Wind: <span id="wind">3</span>km/h</div>
         </div>
     </div>
     </p>
