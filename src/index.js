@@ -192,29 +192,7 @@ let form = document.querySelector("#city-form");
 form.addEventListener("submit", outputCity);
 form.addEventListener("keyup", enterCity);
 
-function showMenuCities() {
-  let citiesElement = document.querySelector("#menu-cities");
-
-  let citiesHTML = `<div class="row justify-content-center p-1 align-items-center">`;
-  let cities = ["Lisbon", "Paris", "Sydney", "San Francisco"];
-
-  cities.forEach(function (city) {
-    citiesHTML =
-      citiesHTML +
-      `<div class="col">
-  <figure class="text-center m-0">
-  <a class="cityName" href ="">Lisbon</a>
-  </figure>
-  `;
-    citiesHTML = citiesHTML + `</div>`;
-    citiesElement.innerHTML = citiesHTML;
-  });
-}
-
-showMenuCities();
-
 //Show Lisbon Weather
-/*
 function showLisbonWeather(event) {
   event.preventDefault();
   let city = "lisbon";
@@ -457,4 +435,3 @@ function showSanFWeather(event) {
 
 let showSanF = document.querySelector("#sanfrancisco");
 showSanF.addEventListener("click", showSanFWeather);
-*/
