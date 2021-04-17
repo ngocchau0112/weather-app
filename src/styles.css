@@ -141,3 +141,12 @@ input[type="text"] {
 .temp-types .active:hover {
   text-decoration: none;
 }
+
+.temp-min,
+.forecast-day {
+  opacity: 50%;
+}
+
+.forecast-icon {
+  width: 60px;
+}
