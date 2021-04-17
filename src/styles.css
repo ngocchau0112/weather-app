@@ -109,3 +109,12 @@ input[type="text"] {
 #city-name {
   text-transform: capitalize;
 }
+
+#github-link {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  margin: 20px;
+  font-family: "Source Code Pro", monospace;
+  font-size: 16px;
+}
