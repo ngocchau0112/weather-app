@@ -147,7 +147,7 @@ function showWeather(response) {
   let currentWeatherIcon = document.querySelector("#current-weather-icon");
   let searchingStatus = document.querySelector("#searching-status");
   currentCityName.innerHTML = response.data.name;
-  currentTemp.innerHTML = response.data.main.temp;
+  currentTemp.innerHTML = Math.round(response.data.main.temp);
   currentWeather.innerHTML = response.data.weather[0].description;
   currentHumidity.innerHTML = response.data.main.humidity;
   currentWindSpeed.innerHTML = response.data.wind.speed;
