@@ -157,6 +157,7 @@ function showWeather(response) {
   );
   currentWeatherIcon.setAttribute("alt", response.data.weather[0].description);
   searchingStatus.innerHTML = ``;
+  getForecast(response.data.coord);
 
   if (city !== undefined) {
     let tempCityC = Math.round(response.data.main.temp);
@@ -178,9 +179,10 @@ function showWeather(response) {
     let Cdegree = document.querySelector("#Cdegree");
     Cdegree.addEventListener("click", changeToC);
   } else {
-    searchingStatus.innerHTML = `Sorry, we don't know the weather for ${city}, try going to https://www.google.com/search?q=weather+${city}`;
+    searchingStatus.innerHTML = `Sorry, we don't know the weather for ${city}, try going to <a href="https://www.google.com/search?q=weather+${city}">Google</a>`;
   }
 }
+
 let form = document.querySelector("#city-form");
 form.addEventListener("submit", outputCity);
 //Show Lisbon Weather
